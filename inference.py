@@ -1,9 +1,12 @@
 import requests
 
-
+# URL for the prediction endpoint
 url = 'http://localhost:9696/predict'
 
-customer_id = 'xyz-123'
+# Unique identifier for the customer
+customer_id = 'user_x'
+
+# Customer data for making predictions
 customer = {
     "gender": "female",
     "seniorcitizen": 0,
@@ -26,11 +29,14 @@ customer = {
     "totalcharges": (24 * 29.85)
 }
 
-
+# Make a POST request to the prediction endpoint with customer data
 response = requests.post(url, json=customer).json()
+
+# Print the prediction response
 print(response)
 
+# Check if the predicted churn status is True and take action
 if response['churn'] == True:
-    print('sending promo email to %s' % customer_id)
+    print('This user will churn. Send promotional email to user with ID: %s' % customer_id)
 else:
-    print('not sending promo email to %s' % customer_id)
+    print('This user will continue using our service. ID: %s' % customer_id)
