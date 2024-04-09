@@ -1,0 +1,15 @@
+on: [push]
+jobs:
+  scan_model:
+    runs-on: ubuntu-latest
+    name: Scan a model
+    steps:
+      - uses: actions/checkout@v3
+      - name: Scan model
+        id: scan_model
+        uses: hiddenlayerai/hiddenlayer-model-scan-github-action@v0.1.1
+        with:
+          model_path: churn_model.pkl
+        env:
+          HL_CLIENT_ID: ${{ secrets.HL_CLIENT_ID }}
+          HL_CLIENT_SECRET: ${{ secrets.HL_CLIENT_SECRET }}
